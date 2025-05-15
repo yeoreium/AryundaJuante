@@ -1,17 +1,19 @@
-# 1. Base image
-FROM php:8.1-fpm
+# 1. Base image (gunakan versi patch terbaru PHP 8.1)
+FROM php:8.1.28-fpm
 
 # 2. Install system dependencies & PHP extensions
 RUN apt-get update && apt-get install -y \
     libzip-dev zip unzip \
-    libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
+    libpng-dev libjpeg-dev libfreetype6-dev \
     libonig-dev libxml2-dev \
     libicu-dev \
     git curl \
- && docker-php-ext-configure zip --with-libzip \
- && docker-php-ext-configure gd --with-freetype --with-jpeg \
- && docker-php-ext-install zip pdo_mysql mbstring exif pcntl bcmath gd intl \
- && pecl install xdebug-3.1.6 \  
+    webp libwebp-dev \
+ && docker-php-ext-configure zip \
+ && docker-php-ext-configure gd --with-jpeg --with-freetype --with-webp \
+ && docker-php-ext-install -j$(nproc) \
+    zip pdo_mysql mbstring exif pcntl bcmath gd intl \
+ && pecl install xdebug-3.2.1 \
  && docker-php-ext-enable xdebug \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
