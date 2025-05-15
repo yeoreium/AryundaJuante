@@ -1,57 +1,40 @@
-# Gunakan image PHP 8.2 resmi
-FROM php:8.2-fpm
+# 1. Base image
+FROM php:8.1-fpm
 
-# Pasang build tools + semua header yang diperlukan
+# 2. Install system dependencies & PHP extensions
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    pkg-config \
-    libonig-dev \
-    zlib1g-dev \
-    libxml2-dev \
-    libexif-dev \
-    locales \
-    zip \
-    unzip \
-    git \
-    curl \
-    vim \
-    jpegoptim optipng pngquant gifsicle \
-  && rm -rf /var/lib/apt/lists/*
+    libzip-dev zip unzip \
+    libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
+    libonig-dev libxml2-dev \
+    libicu-dev \
+    git curl \
+ && docker-php-ext-configure zip --with-libzip \
+ && docker-php-ext-install zip pdo_mysql mbstring exif pcntl bcmath gd intl \
+ && pecl install xdebug \
+ && docker-php-ext-enable xdebug \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
-# 1) Konfigurasi dan build ekstensi ZIP
-RUN set -ex; \
-    docker-php-ext-configure zip --with-libzip; \
-    docker-php-ext-install zip
-
-# 2) Install ekstensi PHP lainnya
-RUN set -ex; \
-    docker-php-ext-install \
-      pdo_mysql \
-      mbstring \
-      exif \
-      pcntl
-
-# Salin dan instal Composer
+# 3. Install Composer (dari official Composer image)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Atur direktori kerja
+# 4. Set working directory
 WORKDIR /var/www
 
-# Salin source code aplikasi
-COPY . .
+# 5. Copy aplikasi ke dalam container
+COPY . /var/www
 
-# Install dependency PHP
-RUN composer install --no-dev --optimize-autoloader
+# 6. Install PHP dependencies via Composer
+RUN composer install --optimize-autoloader --no-dev
 
-# Atur hak akses
-RUN chown -R www-data:www-data /var/www
+# 7. Set permissions (sesuaikan dengan user/nginx atau www-data)
+RUN chown -R www-data:www-data /var/www \
+ && chmod -R 755 /var/www/storage
 
-# Jalankan PHP-FPM
+# 8. Expose port dan jalankan PHP-FPM
+EXPOSE 9000
 CMD ["php-fpm"]
+
 
 
 
