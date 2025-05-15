@@ -11,31 +11,30 @@ RUN apt-get update && apt-get install -y \
  && docker-php-ext-configure zip --with-libzip \
  && docker-php-ext-configure gd --with-freetype --with-jpeg \
  && docker-php-ext-install zip pdo_mysql mbstring exif pcntl bcmath gd intl \
- && pecl install xdebug \
+ && pecl install xdebug-3.1.6 \  
  && docker-php-ext-enable xdebug \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-# 3. Install Composer (dari official Composer image)
+# 3. Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # 4. Set working directory
 WORKDIR /var/www
 
-# 5. Copy aplikasi ke dalam container
+# 5. Copy aplikasi
 COPY . /var/www
 
-# 6. Install PHP dependencies via Composer
+# 6. Install dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# 7. Set permissions (sesuaikan dengan user/nginx atau www-data)
+# 7. Set permissions
 RUN chown -R www-data:www-data /var/www \
  && chmod -R 755 /var/www/storage
 
-# 8. Expose port dan jalankan PHP-FPM
+# 8. Expose port
 EXPOSE 9000
 CMD ["php-fpm"]
-
 
 # Gunakan image PHP 8.2 resmi
 # FROM php:8.2-fpm
