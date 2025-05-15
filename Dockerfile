@@ -1,19 +1,19 @@
-# 1. Base image (gunakan versi patch terbaru PHP 8.1)
-FROM php:8.1.28-fpm
+# 1. Gunakan base image PHP 8.2
+FROM php:8.2.20-fpm
 
 # 2. Install system dependencies & PHP extensions
 RUN apt-get update && apt-get install -y \
     libzip-dev zip unzip \
     libpng-dev libjpeg-dev libfreetype6-dev \
+    libwebp-dev \
     libonig-dev libxml2-dev \
     libicu-dev \
     git curl \
-    webp libwebp-dev \
  && docker-php-ext-configure zip \
  && docker-php-ext-configure gd --with-jpeg --with-freetype --with-webp \
  && docker-php-ext-install -j$(nproc) \
     zip pdo_mysql mbstring exif pcntl bcmath gd intl \
- && pecl install xdebug-3.2.1 \
+ && pecl install xdebug-3.3.1 \  
  && docker-php-ext-enable xdebug \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -37,7 +37,6 @@ RUN chown -R www-data:www-data /var/www \
 # 8. Expose port
 EXPOSE 9000
 CMD ["php-fpm"]
-
 # Gunakan image PHP 8.2 resmi
 # FROM php:8.2-fpm
 
