@@ -830,14 +830,14 @@ var soft = {
             title: 'Click for Creative Tim',
             start: new Date(y, m, 21),
             end: new Date(y, m, 22),
-            url: 'http://www.creative-tim.com/',
+            url: 'https://www.creative-tim.com/',
             className: 'event-orange'
           },
           {
             title: 'Click for Google',
             start: new Date(y, m, 23),
             end: new Date(y, m, 23),
-            url: 'http://www.creative-tim.com/',
+            url: 'https://www.creative-tim.com/',
             className: 'event-orange'
           }
         ]
@@ -1212,7 +1212,7 @@ var soft = {
         "title": "London",
         "latitude": 51.5002,
         "longitude": -0.1262,
-        "url": "http://www.google.co.uk",
+        "url": "https://www.google.co.uk",
         "color": colorSet.next()
       }, {
         "title": "Peking",
@@ -1228,7 +1228,7 @@ var soft = {
         "title": "Tokyo",
         "latitude": 35.6785,
         "longitude": 139.6823,
-        "url": "http://www.google.co.jp",
+        "url": "https://www.google.co.jp",
         "color": colorSet.next()
       }, {
         "title": "Ankara",
