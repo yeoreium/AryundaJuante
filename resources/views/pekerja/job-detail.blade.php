@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <span class="text-xs text-secondary">Kontak:</span>
-                                            <p class="text-sm mb-0">{{ $pekerjaan->clients->kontak }}</p>
+                                            <p class="text-sm mb-0">{{ $pekerjaan->clients->kontak ?? 'Belum Ditentukan' }}</p>
                                         </div>
                                     </div>
                                 </div>
