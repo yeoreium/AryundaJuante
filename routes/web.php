@@ -422,4 +422,5 @@ Route::middleware(['auth', 'role:pekerja'])->group(function () {
     Route::delete('/pekerja/job/{jobId}/documents/{documentId}', [App\Http\Controllers\JobDocumentController::class, 'delete'])->name('pekerja.job-documents-delete');
 });
 
+
 require __DIR__.'/auth.php';

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('total', 18, 2);
             $table->date('deadline')->nullable();
             $table->date('tanggal_tagihan')->nullable();
-            $table->foreignId('ditangani')->constrained('users')->onDelete('set null');
+            $table->foreignId('ditangani')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
 

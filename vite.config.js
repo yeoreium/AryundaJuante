@@ -14,5 +14,8 @@ export default defineConfig({
     ],
     server: {
         cors: true,
+        hmr: {
+            host: 'laravel-kp-production-2999.up.railway.app',
+          },
     },
 });
