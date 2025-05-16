@@ -31,6 +31,8 @@ COPY . .
 
 # Install dependencies (production)
 RUN composer install --optimize-autoloader --no-dev
+RUN npm install
+RUN npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www \
