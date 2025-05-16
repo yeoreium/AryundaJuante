@@ -16,20 +16,23 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ClientController;
 
+// Route::get('/', function () {
+//     if (Auth::check()) {
+//         $role = Auth::user()->role;
+
+//         return match ($role) {
+//             'pekerja' => redirect('/dashboard'),
+//             'admin' => redirect('/admin/dashboard'),
+//             default => abort(403)
+//         };
+//     }
+
+//     return redirect('/login');
+// })->name('home');
+
 Route::get('/', function () {
-    if (Auth::check()) {
-        $role = Auth::user()->role;
-
-        return match ($role) {
-            'pekerja' => redirect('/dashboard'),
-            'admin' => redirect('/admin/dashboard'),
-            default => abort(403)
-        };
-    }
-
-    return redirect('/login');
-})->name('home');
-
+    return view('welcome');
+});
 // Menampilkan daftar pekerja hanya untuk admin
 // Route::get('/pekerja', function () {
 //     $pekerjas = User::where('role', 'pekerja')->get(); // Menampilkan hanya pekerja
