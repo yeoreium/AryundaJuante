@@ -38,9 +38,11 @@ RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/bootstrap/cache
 
 # Expose port 9000
-EXPOSE 9000
+EXPOSE 8080
 
-CMD ["php-fpm"]
+CMD php artisan serve --host=0.0.0.0 --port=8080
+
+# CMD ["php-fpm"]
 
 
 # # 1. Gunakan base image PHP 8.2
