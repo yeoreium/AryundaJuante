@@ -69,7 +69,7 @@
                                                 <div class="d-flex flex-column">
                                                     <div class="mb-2">
                                                         <span class="text-xs text-secondary">Client:</span>
-                                                        <p class="text-sm mb-0">{{ $item->clients->nama }}</p>
+                                                        <p class="text-sm mb-0">{{ $item->clients->nama ?? 'Belum Ditentukan' }}</p>
                                                     </div>
                                                     <div class="mb-2">
                                                         <span class="text-xs text-secondary">Kategori:</span>

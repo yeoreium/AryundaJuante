@@ -81,7 +81,7 @@
                                     <div class="d-flex flex-column">
                                         <div class="mb-3">
                                             <span class="text-xs text-secondary">Nama Client:</span>
-                                            <p class="text-sm mb-0">{{ $pekerjaan->clients->nama }}</p>
+                                            <p class="text-sm mb-0">{{ $pekerjaan->clients->nama ?? 'Belum Ditentukan' }}</p>
                                         </div>
                                         <div class="mb-3">
                                             <span class="text-xs text-secondary">Kontak:</span>
