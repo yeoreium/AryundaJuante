@@ -8,7 +8,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">Edit Client</h5>
+                            <h5 class="mb-0">Edit Klien</h5>
                         </div>
                     </div>
                 </div>

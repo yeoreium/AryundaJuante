@@ -3,8 +3,8 @@
 @section('content')
   <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
     <div class="container-fluid">
-      <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
-        <span class="mask bg-gradient-primary opacity-6"></span>
+      <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/back.jpg'); background-position-y: 50%;">
+        <span class="mask bg-gradient-dark opacity-3"></span>
       </div>
       <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
         <div class="row gx-4">
@@ -47,7 +47,7 @@
             <div class="card-header pb-0 p-3">
               <div class="row">
                 <div class="col-md-8 d-flex align-items-center">
-                  <h6 class="mb-0">Profile Information</h6>
+                  <h6 class="mb-0">Informasi Akun</h6>
                 </div>
                 <div class="col-md-4 text-end">
                   <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#editProfileModal">
@@ -62,7 +62,7 @@
                   <strong class="text-dark">Username:</strong> &nbsp; {{ Auth::user()->username }}
                 </li>
                 <li class="list-group-item border-0 ps-0 text-sm">
-                  <strong class="text-dark">Name:</strong> &nbsp; {{ Auth::user()->name }}
+                  <strong class="text-dark">Nama:</strong> &nbsp; {{ Auth::user()->name }}
                 </li>
                 <li class="list-group-item border-0 ps-0 text-sm">
                   <strong class="text-dark">Kontak:</strong> &nbsp; {{ Auth::user()->kontak }}
@@ -74,25 +74,25 @@
         <div class="col-12 col-xl-4">
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
-              <h6 class="mb-0">Change Password</h6>
+              <h6 class="mb-0">Ubah Password</h6>
             </div>
             <div class="card-body p-3">
               <form action="{{ route('admin.update-password') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                  <label class="form-control-label">Current Password</label>
+                  <label class="form-control-label">Password Saat Ini</label>
                   <input type="password" name="current_password" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label class="form-control-label">New Password</label>
+                  <label class="form-control-label">Password Baru</label>
                   <input type="password" name="new_password" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label class="form-control-label">Confirm New Password</label>
+                  <label class="form-control-label">Konfirmasi Password Baru</label>
                   <input type="password" name="new_password_confirmation" class="form-control" required>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0">Update Password</button>
+                  <button type="submit" class="btn bg-gradient-warning w-100 mt-4 mb-0">Ubah Password</button>
                 </div>
               </form>
             </div>
@@ -107,7 +107,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+          <h5 class="modal-title" id="editProfileModalLabel">Ubah Akun</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="{{ route('admin.update-profile') }}" method="POST">
@@ -118,7 +118,7 @@
               <input type="text" name="username" class="form-control" value="{{ Auth::user()->username }}" required>
             </div>
             <div class="form-group">
-              <label class="form-control-label">Name</label>
+              <label class="form-control-label">Nama</label>
               <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" required>
             </div>
             <div class="form-group">
@@ -127,8 +127,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn bg-gradient-dark">Simpan Perubahan</button>
           </div>
         </form>
       </div>

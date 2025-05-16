@@ -7,8 +7,8 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                     <h5>Daftar Client</h5>
-                    <a href="{{ route('clients.create') }}" class="btn bg-gradient-primary btn-sm">
-                        <i class="fas fa-plus"></i> Tambah Client
+                    <a href="{{ route('clients.create') }}" class="btn bg-gradient-dark btn-sm">
+                        <i class="fas fa-plus"></i> Tambah Klien
                     </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -63,7 +63,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">Tidak ada data client</td>
+                                    <td colspan="3" class="text-center">Tidak ada data klien</td>
                                 </tr>
                                 @endforelse
                             </tbody>

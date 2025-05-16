@@ -13,7 +13,8 @@
                         'admin/jobs-management' => 'Manajemen Pekerjaan',
                         'admin/completed-jobs' => 'Pekerjaan Selesai',
                         'admin/user-management' => 'Manajemen Pengguna',
-                        'admin/job-add' => 'Tambah Pekerjaan'
+                        'admin/job-add' => 'Tambah Pekerjaan',
+                        'clients' => 'Manajemen Klien'
                     ];
 
                     if (str_contains($path, 'admin/detail/')) {
@@ -37,7 +38,8 @@
                         'admin/jobs-management' => 'Manajemen Pekerjaan',
                         'admin/completed-jobs' => 'Pekerjaan Selesai',
                         'admin/user-management' => 'Manajemen Pengguna',
-                        'admin/job-add' => 'Tambah Pekerjaan'
+                        'admin/job-add' => 'Tambah Pekerjaan',
+                        'clients' => 'Manajemen Klien'
                     ];
 
                     // Handle dynamic paths
@@ -50,6 +52,7 @@
                     } else {
                         echo $translations[$path] ?? str_replace('-', ' ', $path);
                     }
+                    
                 @endphp
             </h6>
         </nav>
@@ -75,7 +78,7 @@
                     </form>
 
             </li>
-            
+
             </ul>
         </div>
     </div>

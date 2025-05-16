@@ -26,6 +26,16 @@
                             </a>
                         </div>
                     </div>
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <!-- Search and Filters -->
@@ -110,7 +120,7 @@
                                         Dokumen
                                     </th> --}}
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Client
+                                        Klien
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Deadline

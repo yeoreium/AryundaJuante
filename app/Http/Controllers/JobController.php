@@ -30,7 +30,7 @@ class JobController extends Controller
             'kategori' => 'required|string|max:100',
             'client_id' => 'nullable|exists:clients,id',
             'ditangani' => 'required|exists:users,id',
-            'status' => 'required|in:Mulai,IH,Barang,BA,Tagihan',
+            'status' => 'required|in:Mulai,IH,Barang,BA,Tagihan,Selesai',
             'total' => 'required|numeric',
             'tanggal_tagihan' => 'nullable|date',
             'deskripsi' => 'required|string'

@@ -41,7 +41,7 @@
                                 <label class="form-control-label">Kategori</label>
                                 <p class="form-control-static">{{ $pekerjaan->kategori }}</p>
                             </div>
-                            
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -83,18 +83,18 @@
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="form-group">
-                                <h5>Informasi Client</h5>
+                                <h5>Informasi Klien</h5>
                                 <label for="">Nama</label>
-                                <p class="form-control-static">{{ $pekerjaan->clients->nama }}</p>
+                                <p class="form-control-static">{{ $pekerjaan->clients->nama ?? 'Belum Ditentukan' }}</p>
                                 <label for="">Kontak</label>
-                                <p class="form-control-static">{{ $pekerjaan->clients->kontak }}</p>
+                                <p class="form-control-static">{{ $pekerjaan->clients->kontak ?? 'Belum Ditentukan' }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="form-group">
-                                <label class="form-control-label">Deskripsi</label>
+                                <label class="form-control-label">Catatan</label>
                                 <p class="form-control-static">{{ $pekerjaan->deskripsi }}</p>
                             </div>
                         </div>

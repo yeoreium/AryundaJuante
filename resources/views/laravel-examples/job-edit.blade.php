@@ -57,7 +57,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="client_id" class="form-control-label">Client</label>
+                                    <label for="client_id" class="form-control-label">Klien</label>
                                     <select class="form-control @error('client_id') is-invalid @enderror" id="client_id" name="client_id">
                                         <option value="">Belum Ditentukan</option>
                                         @foreach($clients as $client)
@@ -91,13 +91,14 @@
                                         <option value="Barang" {{ old('status', $pekerjaan->status) == 'Barang' ? 'selected' : '' }}>Barang</option>
                                         <option value="BA" {{ old('status', $pekerjaan->status) == 'BA' ? 'selected' : '' }}>BA</option>
                                         <option value="Tagihan" {{ old('status', $pekerjaan->status) == 'Tagihan' ? 'selected' : '' }}>Tagihan</option>
+                                        <option value="Selesai" {{ old('status', $pekerjaan->status) == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                                     </select>
                                     @error('status')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="total" class="form-control-label">Total</label>
+                                    <label for="total" class="form-control-label">Anggaran</label>
                                     <input type="number" class="form-control @error('total') is-invalid @enderror" id="total" name="total" value="{{ old('total', $pekerjaan->total) }}" required>
                                     @error('total')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -125,7 +126,7 @@
                         <div class="row mt-4">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="deskripsi" class="form-control-label">Deskripsi</label>
+                                    <label for="deskripsi" class="form-control-label">Catatan</label>
                                     <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="4">{{ old('deskripsi', $pekerjaan->deskripsi) }}</textarea>
                                     @error('deskripsi')
                                         <div class="invalid-feedback">{{ $message }}</div>

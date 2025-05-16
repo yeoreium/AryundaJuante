@@ -22,6 +22,16 @@
                         </div>
                         <a href="{{ route('admin.user-profile') }}" class="btn bg-gradient-dark btn-sm mb-0" type="button">+&nbsp; Tambah pekerja</a>
                     </div>
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">

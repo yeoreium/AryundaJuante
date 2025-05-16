@@ -75,9 +75,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="total" class="form-control-label">{{ __('Total') }}</label>
+                                <label for="total" class="form-control-label">{{ __('Anggaran') }}</label>
                                 <div>
-                                    <input class="form-control"  type="number" placeholder="total" name="total">
+                                    <input class="form-control"  type="number" placeholder="Anggaran" name="total">
 
                                 </div>
                             </div>
@@ -94,10 +94,9 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="deskripsi" class="form-control-label">{{ __('deskripsi') }}</label>
+                                <label for="deskripsi" class="form-control-label">{{ __('Catatan') }}</label>
                                 <div>
-                                    <textarea class="form-control" rows="3" type="text" placeholder="deskripsi" name="deskripsi"></textarea>
-
+                                    <textarea class="form-control" rows="3" type="text" placeholder="Catatan" name="deskripsi"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +111,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="ditangani" class="form-control-label">{{ __('Ditangani') }}</label>
+                                <label for="ditangani" class="form-control-label">{{ __('Penanggung Jawab') }}</label>
                                 <div>
                                     <select name="ditangani" class="form-control">
                                         @foreach($users as $user)
@@ -124,7 +123,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="client_id" class="form-control-label">{{ __('Client') }}</label>
+                                <label for="client_id" class="form-control-label">{{ __('Klien') }}</label>
                                 <div>
                                     <select name="client_id" class="form-control">
                                         <option value="">Belum Ditentukan</option>
