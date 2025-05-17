@@ -36,6 +36,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
+
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <!-- Search and Filters -->
@@ -108,7 +109,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Kode Pekerjaan
+                                        KP
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Nama
@@ -145,7 +146,9 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0 text-truncate" style="max-width: 150px;">{{ $p->nama }}</p>
+                                            <p class="text-xs font-weight-bold mb-0" style="max-width: 180px; word-wrap: break-word; white-space: normal;">
+                                                {{ $p->nama }}
+                                            </p>
                                         </div>
                                     </td>
                                     <td class="text-center">
@@ -345,7 +348,9 @@
                     </td>
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
-                            <p class="text-xs font-weight-bold mb-0 text-truncate" style="max-width: 150px;">${item.nama}</p>
+                            <p class="text-xs font-weight-bold mb-0" style="max-width: 180px; word-wrap: break-word; white-space: normal;">
+                                                {{ $p->nama }}
+                                            </p>
                         </div>
                     </td>
                     <td class="text-center">
