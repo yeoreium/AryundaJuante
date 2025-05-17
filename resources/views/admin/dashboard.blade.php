@@ -274,6 +274,13 @@ for ($i = 1; $i <= 12; $i++) {
         <div class="card">
             <div class="card-header pb-0">
               <h6>Notifikasi</h6>
+              <form action="{{ route('notifikasi.destroyAll') }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn bg-gradient-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus semua notifikasi?')">
+                    <i class="fas fa-trash"></i> Hapus Semua
+                </button>
+            </form>
             </div>
             <div class="card-body p-3" style="max-height: 400px; overflow-y: auto;">
               <div class="timeline timeline-one-side">

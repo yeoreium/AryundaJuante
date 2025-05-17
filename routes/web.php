@@ -15,6 +15,7 @@ use App\Http\Controllers\PekerjaanController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\NotifikasiController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -410,6 +411,10 @@ Route::get('/admin/job/{id}/edit', [JobController::class, 'edit'])->name('admin.
 Route::put('/admin/job/{id}', [JobController::class, 'update'])->name('admin.job-update');
 Route::delete('/admin/job/{id}', [JobController::class, 'destroy'])->name('admin.job-delete');
 Route::get('/admin/job/{id}/history', [PekerjaanController::class, 'showHistory'])->name('admin.job-history');
+
+// Notifikasi routes
+
+Route::delete('/notifikasi/all', [NotifikasiController::class, 'destroyAll'])->name('notifikasi.destroyAll');
 
 // Document routes for admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
