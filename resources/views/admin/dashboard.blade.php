@@ -97,7 +97,7 @@ for ($i = 1; $i <= 12; $i++) {
             <div class="card z-index-2 ">
                 <div class="card-body">
                     <div class="card-header pb-4.9 text-center">
-                        <h6>Jumlah Pekerjaan per Client</h6>
+                        <h6>Jumlah Pekerjaan per Klien</h6>
                         <canvas id="pekerjaanChart" width="400" height="400"></canvas>
                     </div>
                 </div>

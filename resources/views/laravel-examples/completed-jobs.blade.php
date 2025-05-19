@@ -61,6 +61,10 @@
                                         Nama
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        No Kontak
+                                    </th>
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Deadline
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -88,6 +92,9 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $p->no_kontrak }}</p>
+                                    </td>
+                                    <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $p->deadline ? $p->deadline->format('d/m/Y') : '-' }}</p>
                                     </td>
                                     <td class="text-center">
@@ -97,7 +104,7 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $p->ditanganiUser->name ?? 'Belum Ditentukan' }}</p>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.job-detail', $p->id) }}" class="btn btn-sm bg-gradient-info">
+                                        <a href="{{ route('admin.job-detail-history', $p->id) }}" class="btn btn-sm bg-gradient-info">
                                             <i class="fas fa-info-circle"></i> Detail
                                         </a>
                                     </td>
@@ -211,13 +218,16 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="text-center">
-                        <div class="d-flex justify-content-center">
-                            <p class="text-xs font-weight-bold mb-0 text-truncate" style="max-width: 150px;">${item.nama}</p>
-                        </div>
-                    </td>
-                    <td class="text-center">
                         <p class="text-xs font-weight-bold mb-0">${item.kode_pekerjaan}</p>
                     </td>
+                    <td class="text-center">
+                                        <div class="d-flex justify-content-center">
+                                            <p class="text-xs font-weight-bold mb-0" style="max-width: 180px; word-wrap: break-word; white-space: normal;">
+                                                ${item.nama}
+                                            </p>
+                                        </div>
+                                    </td>
+
                     <td class="text-center">
                         <p class="text-xs font-weight-bold mb-0">${item.no_kontrak}</p>
                     </td>

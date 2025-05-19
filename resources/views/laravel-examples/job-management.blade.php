@@ -112,11 +112,11 @@
                                         KP
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Nama
+                                        Nama Pekerjaan
                                     </th>
-                                    {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         No Kontrak
-                                    </th> --}}
+                                    </th>
                                     {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Dokumen
                                     </th> --}}
@@ -140,7 +140,7 @@
                             </thead>
                             <tbody id="pekerjaanTableBody">
                                 @foreach($pekerjaans->take(10) as $p)
-                                <tr style="{{ \Carbon\Carbon::parse($p->deadline)->isPast() ? 'color: red !important;' : '' }}">
+                                <tr style="{{ $p->deadline && \Carbon\Carbon::parse($p->deadline)->isPast() ? 'color: red !important;' : '' }}">
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $p->kode_pekerjaan }}</p>
                                     </td>
@@ -152,11 +152,11 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $p->no_kontrak }}</p>
+                                    </td>
+                                    <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $p->clients->nama ?? 'Belum Ditentukan' }}</p>
                                     </td>
-                                    {{-- <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $p->no_kontrak }}</p>
-                                    </td> --}}
                                     {{-- <td class="text-center">
                                         <a href="{{ $p->url_dokumen }}" target="_blank">Lihat Dokumen</a>
                                     </td> --}}
@@ -349,9 +349,12 @@
                     <td class="text-center">
                         <div class="d-flex justify-content-center">
                             <p class="text-xs font-weight-bold mb-0" style="max-width: 180px; word-wrap: break-word; white-space: normal;">
-                                                {{ $p->nama }}
+                                                ${item.nama}
                                             </p>
                         </div>
+                    </td>
+                    <td class="text-center">
+                        <p class="text-xs font-weight-bold mb-0">${item.kode_pekerjaan}</p>
                     </td>
                     <td class="text-center">
                         <p class="text-xs font-weight-bold mb-0">${item.clients?.nama ?? 'Belum Ditentukan'}</p>

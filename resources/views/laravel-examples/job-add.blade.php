@@ -69,7 +69,6 @@
                                 <label for="deadline" class="form-control-label">{{ __('Deadline') }}</label>
                                 <div>
                                     <input class="form-control"  type="date" placeholder="Deadline" name="deadline">
-
                                 </div>
                             </div>
                         </div>

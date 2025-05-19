@@ -163,6 +163,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         $clients = Client::all();
         return view('laravel-examples.job-detail', compact('pekerjaan','clients'));
     })->name('admin.job-detail');
+    Route::get('/admin/detail-riwayat/{id}', function ($id) {
+        $pekerjaan = Pekerjaan::with('ditanganiUser')->findOrFail($id);
+        $clients = Client::all();
+        return view('laravel-examples.job-detail-history', compact('pekerjaan','clients'));
+    })->name('admin.job-detail-history');
     // Route::get('/users', function () {
     //     $users = User::all();
     //     return view('admin.user-management', compact('users'));
@@ -208,9 +213,9 @@ Route::post('/admin/job-add', function (Request $request) {
         'nama' => 'required|string|max:255',
         'kode_pekerjaan' => 'required|string|max:255',
         'no_kontrak' => 'required|string|max:255',
-        'deadline' => 'required|date',
+        'deadline' => 'nullable|date',
         'ditangani' => 'required|exists:users,id',
-        'deskripsi' => 'required|string',
+        'deskripsi' => 'nullable|string',
         'kategori' => 'required|string',
         'client_id' => 'nullable|exists:clients,id',
         'total' => 'required|numeric',
@@ -223,7 +228,7 @@ Route::post('/admin/job-add', function (Request $request) {
         'no_kontrak' => $request->no_kontrak,
         'deadline' => $request->deadline,
         'ditangani' => $request->ditangani,
-        'deskripsi' => $request->deskripsi,
+        'deskripsi' => $request->deskripsi??"-",
         'kategori' => $request->kategori,
         'client_id' => $request->client_id,
         'total' => $request->total,
@@ -349,6 +354,7 @@ Route::middleware(['auth', 'role:pekerja'])->group(function (){
         $pekerjaan = Pekerjaan::findOrFail($id);
         return view('pekerja.job-detail', compact('pekerjaan'));
     })->name('pekerja.job-detail');
+
 
     Route::post('update-profile', function (Request $request) {
         $request->validate([

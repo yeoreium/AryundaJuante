@@ -12,7 +12,7 @@
                         </div>
                         <div>
 
-                            <a href="{{ route('admin.jobs-management') }}" class="btn bg-gradient-dark btn-sm mb-0 ms-2">
+                            <a href="{{ route('admin.completed-jobs') }}" class="btn bg-gradient-dark btn-sm mb-0 ms-2">
                                 <i class="fas fa-arrow-left"></i> Kembali
                             </a>
                         </div>
@@ -69,6 +69,10 @@
                             <div class="form-group">
                                 <label class="form-control-label">Tanggal Tagihan</label>
                                 <p class="form-control-static">{{ $pekerjaan->tanggal_tagihan ? \Carbon\Carbon::parse($pekerjaan->tanggal_tagihan)->format('d/m/Y') : 'Belum Ditentukan' }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Tanggal Selesai</label>
+                                <p class="form-control-static">{{ \Carbon\Carbon::parse($pekerjaan->updated_at->format('d/m/Y')) }}</p>
                             </div>
                             {{-- <div class="form-group">
                                 <label class="form-control-label">Dokumen</label>
