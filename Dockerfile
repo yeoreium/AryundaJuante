@@ -27,10 +27,16 @@ WORKDIR /var/www/html
 # Copy aplikasi
 COPY . .
 
+
 # Install dependencies (production)
 RUN composer install --optimize-autoloader --no-dev
 RUN npm install
 RUN npm run build
+
+# Buat symlink storage → public/storage
+# Pastikan folder public/storage belum ada (jika ada, hapus dulu)
+RUN if [ -d public/storage ]; then rm -rf public/storage; fi \
+ && php artisan storage:link
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
