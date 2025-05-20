@@ -69,12 +69,12 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $document->created_at->format('d/m/Y H:i') }}</p>
                                             </td>
                                             <td class="align-middle text-center">
-                                                {{-- <a href="{{ Storage::url($document->file_path) }}" target="_blank" class="btn btn-sm bg-gradient-info me-2">
-                                                    <i class="fas fa-eye"></i> Lihat
-                                                </a> --}}
-                                                <a href="{{ $document->file_path }}" target="_blank" class="btn btn-sm bg-gradient-info me-2">
+                                                <a href="{{ Storage::url($document->file_path) }}" target="_blank" class="btn btn-sm bg-gradient-info me-2">
                                                     <i class="fas fa-eye"></i> Lihat
                                                 </a>
+                                                {{-- <a href="{{ $document->file_path }}" target="_blank" class="btn btn-sm bg-gradient-info me-2">
+                                                    <i class="fas fa-eye"></i> Lihat
+                                                </a> --}}
                                                 <form action="{{ route('admin.job-documents-delete', [$pekerjaan->id, $document->id]) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
