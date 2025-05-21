@@ -479,7 +479,7 @@ $stats = DB::table('pekerjaan')
       new Chart(ctx, {
         type: "bar",
         data: {
-          labels: labels,
+          labels: ["Mulai","IH","Barang","BA","Tagihan"],
           datasets: [{
             label: "Status Pekerjaan",
             tension: 0.4,
