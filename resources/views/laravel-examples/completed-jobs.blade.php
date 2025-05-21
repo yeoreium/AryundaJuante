@@ -46,6 +46,8 @@
                                     <option value="updated_asc">Terlama Selesai</option>
                                     <option value="created_desc">Terbaru Dibuat</option>
                                     <option value="created_asc">Terlama Dibuat</option>
+                                    <option value="no_kp_asc">No KP A-Z</option>
+                                    <option value="no_kp_desc">No KP Z-A</option>
                                 </select>
                             </div>
                         </div>
@@ -175,6 +177,8 @@
                 const bCreated = new Date(b.created_at);
                 const aUpdated = new Date(a.updated_at);
                 const bUpdated = new Date(b.updated_at);
+                const aNoKp = a.kode_pekerjaan;
+                const bNoKp = b.kode_pekerjaan;
 
                 switch(selectedSort) {
                     case 'deadline_asc':
@@ -195,6 +199,10 @@
                         return bUpdated - aUpdated;
                     case 'updated_asc':
                         return aUpdated - bUpdated;
+                    case 'no_kp_asc':
+                        return aNoKp.localeCompare(bNoKp);
+                    case 'no_kp_desc':
+                        return bNoKp.localeCompare(aNoKp);
                     default:
                         return bUpdated - aUpdated; // Default sort by most recently completed
                 }
@@ -241,7 +249,7 @@
                         <p class="text-xs font-weight-bold mb-0">${item.ditangani_user ? item.ditangani_user.name : 'Belum Ditentukan'}</p>
                     </td>
                     <td class="text-center">
-                        <a href="/admin/detail/${item.id}" class="btn btn-sm bg-gradient-info">
+                        <a href="/admin/detail-riwayat/${item.id}" class="btn btn-sm bg-gradient-info">
                             <i class="fas fa-info-circle"></i> Detail
                         </a>
                     </td>

@@ -91,43 +91,43 @@ $biayaCounts = [];
 for ($i = 1; $i <= 12; $i++) {
     $biayaCounts[] = $biayaPerMonth[$i] ?? 0;
 }
+// Urutkan sesuai urutan enum
+$stats = DB::table('pekerjaan')
+              ->where('status','!=','selesai')
+              ->selectRaw('status, count(*) as total')
+              ->groupBy('status')
+              ->orderByRaw("FIELD(status, 'Mulai', 'IH', 'Barang', 'BA', 'Tagihan')")
+              ->get();
+
+    $gradientMap = [
+        'Mulai'    => ['#ea0606', '#ff3d59'], // danger
+        'IH'       => ['#627594', '#8ca1cb'], // secondary
+        'Barang'   => ['#ff8a00', '#ffde00'], // warning
+        'BA'       => ['#2152ff', '#02c6f3'], // info
+        'Tagihan'  => ['#17ad37', '#84dc14'], // success
+    ];
+
+    $labels = [];
+    $data2 = [];
+    $gradientColors = [];
+
+    foreach ($stats as $stat) {
+        $labels[] = ucfirst($stat->status);
+        $data2[] = $stat->total;
+        $gradientColors[] = $gradientMap[$stat->status];
+    }
+
 @endphp
-    <div class="row mt-4">
-        <div class="col-lg-5  ">
-            <div class="card z-index-2 ">
-                <div class="card-body">
-                    <div class="card-header pb-4.9 text-center">
-                        <h6>Jumlah Pekerjaan per Klien</h6>
-                        <canvas id="pekerjaanChart" width="400" height="400"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-7">
-            <div class="card z-index-2">
-              <div class="card-header pb-0">
-                <h6>Diagram Jumlah Pekerjaan</h6>
-                <p class="text-sm">
-                  Tahun <span class="font-weight-bold">{{ $year }}</span>
-                </p>
-              </div>
-              <div class="card-body p-3">
-                <div class="chart">
-                  <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-    </div>
-  <div class="row mt-4">
-    <div class="col-lg-12 mb-lg-0 mb-4">
+
+  <div class="row mb-4">
+    <div class="col-lg-7 mb-lg-0 mb-4">
 
         <div class="card z-index-2">
 
           <div class="card-body p-3">
             <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
               <div class="chart">
-                <canvas id="chart-bars" class="chart-canvas" height="250"></canvas>
+                <canvas id="chart-bars" class="chart-canvas" height="200"></canvas>
               </div>
             </div>
             <h6 class="ms-2 mt-4 mb-0"> Diagram Pemasukan </h6>
@@ -184,8 +184,66 @@ for ($i = 1; $i <= 12; $i++) {
             </div>
           </div>
         </div>
+
+      </div>
+      <div class="col-lg-5 mb-lg-0 mb-4">
+        <div class="card z-index-2">
+          <div class="card-body p-3">
+            <h6 class="ms-2 mt-4 mb-0"> Jumlah Pekerjaan </h6>
+            <p class="text-sm ms-2"> Pada Setiap <span class="font-weight-bolder">Status</span>  </p>
+            <div class="bg-white border-radius-lg py-3 pe-1 mb-3">
+              <div class="chart">
+                <canvas id="chart-bars2" class="chart-canvas2" height="200"></canvas>
+              </div>
+            </div>
+
+            <div class="mt-4 row justify-content-center g-3">
+                @foreach($labels as $index => $label)
+                <div class="col-auto">
+                    <div class="d-flex align-items-center">
+                        <span class="legend-badge me-2"
+                              style="background: linear-gradient(135deg, {{ $gradientColors[$index][0] }}, {{ $gradientColors[$index][1] }});
+                                     width: 20px; height: 20px; border-radius: 4px"></span>
+                        <span class="text-muted fw-medium">{{ $label }}</span>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+          </div>
+        </div>
       </div>
 
+
+    </div>
+    <div class="row">
+        <div class="col-lg-5  ">
+            <div class="card z-index-2 ">
+                <div class="card-body">
+                    <div class="card-header pb-4.9 text-center">
+                        <h6>Jumlah Pekerjaan per Klien</h6>
+                        <canvas id="pekerjaanChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card z-index-2">
+              <div class="card-header pb-0">
+                <h6>Diagram Jumlah Pekerjaan</h6>
+                <p class="text-sm">
+                  Tahun <span class="font-weight-bold">{{ $year }}</span>
+                </p>
+              </div>
+              <div class="card-body p-3">
+                <div class="chart">
+                  <canvas id="chart-line" class="chart-canvas" height="285"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
 
 
   <div class="row my-4">
@@ -295,7 +353,7 @@ for ($i = 1; $i <= 12; $i++) {
                     </div>
                   </div>
                 @empty
-                  <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Belum ada notifikasi.</p>
+                  <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Notifikasi kosong.</p>
                 @endforelse
               </div>
             </div>
@@ -303,11 +361,221 @@ for ($i = 1; $i <= 12; $i++) {
 
     </div>
   </div>
+  <style>
+    .chart-container {
+        position: relative;
+        margin: auto;
+    }
+
+    .legend-badge {
+        transition: transform 0.2s;
+    }
+
+    .legend-badge:hover {
+        transform: scale(1.1);
+    }
+
+    .card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        backdrop-filter: blur(10px);
+    }
+    </style>
 
 @endsection
 @push('dashboard')
   <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const gradientColors = @json($gradientColors);
+    const data = @json($data2);
+    const labels = @json($labels);
+
+    const chart = new Chart(document.getElementById('pekerjaanChart2'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Jumlah Pekerjaan',
+                data: data,
+                backgroundColor: function(context) {
+                    const chart = context.chart;
+                    const { ctx, chartArea } = chart;
+                    if (!chartArea) return null;
+
+                    const index = context.dataIndex;
+                    const colors = gradientColors[index];
+
+                    const gradient = ctx.createLinearGradient(
+                        0, chartArea.bottom,
+                        0, chartArea.top
+                    );
+                    gradient.addColorStop(0, colors[0]);
+                    gradient.addColorStop(1, colors[1]);
+                    return gradient;
+                },
+                borderColor: '#ffffff',
+                borderWidth: 0,
+                borderRadius: 8,
+                // hoverBackgroundColor: function(context) {
+                //     const index = context.dataIndex;
+                //     return gradientColors[index][1];
+                // },
+                hoverBorderWidth: 2,
+                barThickness: 40
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(30, 41, 59, 0.95)',
+                    titleFont: { size: 14, weight: '500' },
+                    bodyFont: { size: 14 },
+                    padding: 12,
+                    displayColors: false,
+                    callbacks: {
+                        title: (items) => `${items[0].label}`,
+                        label: (context) => ` ${context.parsed.y} pekerjaan`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(226, 232, 240, 0.5)' },
+                    ticks: {
+                        color: '#64748b',
+                        font: { size: 13 },
+                        precision: 0
+                    },
+                    border: { dash: [4, 4] }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: '#64748b',
+                        font: {
+                            size: 14,
+                            weight: '600'
+                        }
+                    }
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+                intersect: false
+            }
+        }
+    });
+});
     window.onload = function() {
+        var ctx = document.getElementById("chart-bars2").getContext("2d");
+        const gradientColors = @json($gradientColors);
+    const data = @json($data2);
+    const labels = @json($labels);
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Status Pekerjaan",
+            tension: 0.4,
+
+            borderWidth: 0,
+            backgroundColor: function(context) {
+                    const chart = context.chart;
+                    const { ctx, chartArea } = chart;
+                    if (!chartArea) return null;
+
+                    const index = context.dataIndex;
+                    const colors = gradientColors[index];
+
+                    const gradient = ctx.createLinearGradient(
+                        0, chartArea.bottom,
+                        0, chartArea.top
+                    );
+                    gradient.addColorStop(0, colors[0]);
+                    gradient.addColorStop(1, colors[1]);
+                    return gradient;
+                },
+            borderRadius: 4,
+            borderSkipped: false,
+            // backgroundColor: "#fff",
+            data: data,
+            maxBarThickness: 15
+          }, ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+                    backgroundColor: 'rgba(30, 41, 59, 0.95)',
+                    titleFont: { size: 14, weight: '500' },
+                    bodyFont: { size: 14 },
+                    padding: 12,
+                    displayColors: false,
+                    callbacks: {
+                        title: (items) => `${items[0].label}`,
+                        label: (context) => ` ${context.parsed.y} pekerjaan`
+                    }
+                }
+
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: true,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: true,
+              },
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+                beginAtZero: true,
+                padding: 15,
+                font: {
+                  size: 14,
+                  family: "Open Sans",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+                color: "#000"
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false
+              },
+              ticks: {
+                display: true,
+                color: '#000',
+                font: {
+                  size: 11,
+                  family: "Open Sans",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+                padding: 10
+              },
+            },
+          },
+        },
+      });
         // Function to format number to Indonesian Rupiah with abbreviations
         function formatRupiah(number) {
             if (number >= 1000000000) {
@@ -408,105 +676,117 @@ for ($i = 1; $i <= 12; $i++) {
 
       var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-      var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+// Gradient untuk Pekerjaan Selesai (lebih kuning)
+var gradientYellow = ctx2.createLinearGradient(0, 0, 0, 400);
+gradientYellow.addColorStop(0, '#FFD700'); // Kuning emas
+gradientYellow.addColorStop(0.5, '#FFEC00'); // Kuning cerah
+gradientYellow.addColorStop(1, '#FFA500'); // Oranye
 
-        gradientStroke1.addColorStop(1, 'rgba(255,193,7,0.2)');     // light warning yellow
-        gradientStroke1.addColorStop(0.2, 'rgba(255,152,0,0.0)');    // soft orange, fully transparent
-        gradientStroke1.addColorStop(0, 'rgba(255,193,7,0)');        // warning yellow, transparent
+// Gradient untuk Jumlah Pekerjaan
+var gradientPurple = ctx2.createLinearGradient(0, 0, 0, 400);
+gradientPurple.addColorStop(0, '#2c3154');
+gradientPurple.addColorStop(1, '#141727');
 
-
-      var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-      gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-      gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-      gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-      new Chart(ctx2, {
-        type: "line",
-        data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          datasets: [{
-              label: "Pekerjaan Selesai",
-              tension: 0.4,
-              borderWidth: 0,
-              pointRadius: 0,
-              borderColor: "#fec20c",
-              borderWidth: 3,
-              backgroundColor: gradientStroke1,
-              fill: true,
-              data: @json($jobsdonecount),
-              maxBarThickness: 6
-            },
-            {
-              label: "Jumlah Pekerjaan",
-              tension: 0.4,
-              borderWidth: 0,
-              pointRadius: 0,
-              borderColor: "#3A416F",
-              borderWidth: 3,
-              backgroundColor: gradientStroke2,
-              fill: true,
-              data: @json($jobCounts),
-              maxBarThickness: 6
-            }
-          ],
+new Chart(ctx2, {
+  type: "bar",
+  data: {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [
+      {
+        label: "Pekerjaan Selesai",
+        backgroundColor: gradientYellow,
+        borderColor: "#fec20c",
+        borderWidth: 1,
+        hoverBackgroundColor: "#FFEC00", // Kuning lebih terang saat hover
+        hoverBorderColor: "#FFA500",
+        borderRadius: 6,
+        data: @json($jobsdonecount),
+      },
+      {
+        label: "Jumlah Pekerjaan",
+        backgroundColor: gradientPurple,
+        borderColor: "#3A416F",
+        borderWidth: 1,
+        hoverBackgroundColor: "#2c3154",
+        hoverBorderColor: "#141727",
+        borderRadius: 6,
+        data: @json($jobCounts),
+      }
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+        labels: {
+          color: '#333',
+          font: {
+            family: "Open Sans",
+            size: 12,
+          },
+          padding: 20,
+          usePointStyle: true,
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        titleFont: {
+          family: "Open Sans",
+          size: 12,
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            }
-          },
-          interaction: {
-            intersect: false,
-            mode: 'index',
-          },
-          scales: {
-            y: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5]
-              },
-              ticks: {
-                display: true,
-                padding: 10,
-                color: '#b2b9bf',
-                font: {
-                  size: 11,
-                  family: "Open Sans",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-              }
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                display: false,
-                drawOnChartArea: false,
-                drawTicks: false,
-                borderDash: [5, 5]
-              },
-              ticks: {
-                display: true,
-                color: '#b2b9bf',
-                padding: 20,
-                font: {
-                  size: 11,
-                  family: "Open Sans",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-              }
-            },
-          },
+        bodyFont: {
+          family: "Open Sans",
+          size: 12,
         },
-      });
+        cornerRadius: 6,
+        displayColors: true,
+        mode: 'index',
+        intersect: false
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          drawBorder: false,
+          display: true,
+          color: "rgba(0, 0, 0, 0.05)",
+          drawTicks: false,
+        },
+        ticks: {
+          color: '#b2b9bf',
+          font: {
+            size: 11,
+            family: "Open Sans",
+          },
+          padding: 10,
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false,
+          drawTicks: false,
+        },
+        ticks: {
+          color: '#b2b9bf',
+          font: {
+            size: 11,
+            family: "Open Sans",
+          },
+          padding: 5,
+        }
+      }
+    },
+    interaction: {
+      mode: 'index',
+      intersect: false
+    }
+  }
+});
 
       // Pagination functionality
       let currentPage = 1;

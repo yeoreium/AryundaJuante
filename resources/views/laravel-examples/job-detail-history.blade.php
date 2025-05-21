@@ -68,11 +68,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Tanggal Tagihan</label>
-                                <p class="form-control-static">{{ $pekerjaan->tanggal_tagihan ? \Carbon\Carbon::parse($pekerjaan->tanggal_tagihan)->format('d/m/Y') : 'Belum Ditentukan' }}</p>
+                                <p class="form-control-static">{{ $pekerjaan->tanggal_tagihan ? $pekerjaan->tanggal_tagihan->format('d/m/Y') : 'Belum Ditentukan' }}</p>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Tanggal Selesai</label>
-                                <p class="form-control-static">{{ \Carbon\Carbon::parse($pekerjaan->updated_at->format('d/m/Y')) }}</p>
+                                <p class="form-control-static">{{ $pekerjaan->updated_at->format('d/m/Y') }}</p>
                             </div>
                             {{-- <div class="form-group">
                                 <label class="form-control-label">Dokumen</label>
@@ -85,13 +85,22 @@
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <h5>Informasi Klien</h5>
                                 <label for="">Nama</label>
                                 <p class="form-control-static">{{ $pekerjaan->clients->nama ?? 'Belum Ditentukan' }}</p>
                                 <label for="">Kontak</label>
                                 <p class="form-control-static">{{ $pekerjaan->clients->kontak ?? 'Belum Ditentukan' }}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <h5>Informasi Penanggung Jawab</h5>
+                                <label for="">Nama</label>
+                                <p class="form-control-static">{{ $pekerjaan->ditanganiUser->name ?? 'Belum Ditentukan' }}</p>
+                                <label for="">Kontak</label>
+                                <p class="form-control-static">{{ $pekerjaan->ditanganiUser->kontak ?? 'Belum Ditentukan' }}</p>
                             </div>
                         </div>
                     </div>
@@ -112,7 +121,7 @@
                     <a href="{{ route('admin.job-documents', $pekerjaan->id) }}" class="btn btn-sm bg-gradient-warning me-2">
                         <i class="fas fa-file"></i> Dokumen
                     </a>
-                    <form action="{{ route('admin.job-delete', $pekerjaan->id) }}" method="POST" style="display: inline;">
+                    <form action="{{ route('admin.completed-jobs-delete', $pekerjaan->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn bg-gradient-danger" onclick="return confirm('Yakin ingin menghapus pekerjaan ini?')">

@@ -81,13 +81,22 @@
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <h5>Informasi Klien</h5>
                                 <label for="">Nama</label>
                                 <p class="form-control-static">{{ $pekerjaan->clients->nama ?? 'Belum Ditentukan' }}</p>
                                 <label for="">Kontak</label>
                                 <p class="form-control-static">{{ $pekerjaan->clients->kontak ?? 'Belum Ditentukan' }}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <h5>Informasi Penanggung Jawab</h5>
+                                <label for="">Nama</label>
+                                <p class="form-control-static">{{ $pekerjaan->ditanganiUser->name ?? 'Belum Ditentukan' }}</p>
+                                <label for="">Kontak</label>
+                                <p class="form-control-static">{{ $pekerjaan->ditanganiUser->kontak ?? 'Belum Ditentukan' }}</p>
                             </div>
                         </div>
                     </div>

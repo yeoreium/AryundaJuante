@@ -25,7 +25,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="document_name" class="form-control-label">Nama Dokumen</label>
-                                    <input type="text" class="form-control @error('document_name') is-invalid @enderror" id="document_name" name="document_name" required>
+                                    <input type="text" class="form-control @error('document_name') is-invalid @enderror" placeholder="Nama Dokumen" id="document_name" name="document_name" required>
                                     @error('document_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

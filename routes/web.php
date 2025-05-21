@@ -154,6 +154,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
             ->get();
         return view('laravel-examples.completed-jobs', compact('pekerjaans'));
     })->name('admin.completed-jobs');
+    Route::delete('/admin/completed-jobs/{id}', [JobController::class, 'destroy2'])->name('admin.completed-jobs-delete');
     Route::get('/admin/tambah-pekerja', function () {
         $users = User::all();
         return view('laravel-examples.user-profile',compact('users'));
@@ -190,6 +191,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
             'password' => Hash::make($passwordRaw),
             'role' => 'pekerja',
             'kontak' => $validated['kontak'],
+            'email' => 'email@email.com',
         ]);
 
         return redirect()->route('admin.user-management')->with('success', 'Pekerja berhasil ditambahkan');
@@ -250,19 +252,22 @@ Route::get('/admin/tambah-pekerja/{id}/edit', function ($id) {
 })->name('admin.pekerja.edit');
 
 Route::put('/admin/tambah-pekerja/{id}', function (Request $request, $id) {
-    $request->validate([
+    $validated = $request->validate([
         'name' => 'required|string|max:255',
         'username' => 'required|string|max:255|unique:users,username,' . $id,
         'birthdate' => 'required|date',
         'kontak' => 'required|string',
     ]);
 
+    $passwordRaw = Carbon::parse($validated['birthdate'])->format('dmY');
     $pekerja = User::findOrFail($id);
     $pekerja->update([
-        'name' => $request->name,
-        'username' => $request->username,
-        'birthdate' => $request->birthdate,
-        'kontak' => $request->kontak,
+        'name' => $validated['name'],
+        'username' => $validated['username'],
+        'birthdate' => $validated['birthdate'],
+        'kontak' => $validated['kontak'],
+        'password' => Hash::make($passwordRaw),
+        'email' => 'email@email.com',
     ]);
 
     return redirect()->route('admin.user-management')->with('success', 'Data pekerja berhasil diperbarui!');

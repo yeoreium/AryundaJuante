@@ -26,14 +26,14 @@ class JobController extends Controller
             'nama' => 'required|string|max:255',
             'kode_pekerjaan' => 'required|string|max:255',
             'no_kontrak' => 'required|string|max:255',
-            'deadline' => 'required|date',
+            'deadline' => 'nullable|date',
             'kategori' => 'required|string|max:100',
             'client_id' => 'nullable|exists:clients,id',
             'ditangani' => 'required|exists:users,id',
             'status' => 'required|in:Mulai,IH,Barang,BA,Tagihan,Selesai',
             'total' => 'required|numeric',
             'tanggal_tagihan' => 'nullable|date',
-            'deskripsi' => 'required|string'
+            'deskripsi' => 'nullable|string'
         ]);
 
         $pekerjaan = Pekerjaan::findOrFail($id);
@@ -50,7 +50,7 @@ class JobController extends Controller
             'status' => $request->status,
             'total' => $request->total,
             'tanggal_tagihan' => $request->tanggal_tagihan,
-            'deskripsi' => $request->deskripsi
+            'deskripsi' => $request->deskripsi??"-",
         ]);
 
         // Jika status berubah, catat ke riwayat dan buat notifikasi
@@ -85,6 +85,14 @@ class JobController extends Controller
         $pekerjaan->delete();
 
         return redirect()->route('admin.jobs-management')
+            ->with('success', 'Pekerjaan berhasil dihapus');
+    }
+    public function destroy2($id)
+    {
+        $pekerjaan = Pekerjaan::findOrFail($id);
+        $pekerjaan->delete();
+
+        return redirect()->route('admin.completed-jobs')
             ->with('success', 'Pekerjaan berhasil dihapus');
     }
 }

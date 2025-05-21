@@ -12,6 +12,6 @@ class NotifikasiController extends Controller
     {
         Notifikasi::truncate(); // Menghapus seluruh isi tabel
 
-        return response()->json(['message' => 'Semua notifikasi berhasil dihapus']);
+        return redirect()->route('admin.dashboard')->with('success', 'Semua notifikasi berhasil dihapus');
     }
 }

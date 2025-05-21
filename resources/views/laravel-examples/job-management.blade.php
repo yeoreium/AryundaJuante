@@ -100,6 +100,8 @@
                                     <option value="deadline_desc">Deadline (Terjauh)</option>
                                     <option value="created_desc">Terbaru Dibuat</option>
                                     <option value="created_asc">Terlama Dibuat</option>
+                                    <option value="no_kp_asc">No KP A-Z</option>
+                                    <option value="no_kp_desc">No KP Z-A</option>
                                 </select>
                             </div>
                         </div>
@@ -278,6 +280,8 @@
                 const bDeadline = b.deadline ? new Date(b.deadline) : null;
                 const aCreated = new Date(a.created_at);
                 const bCreated = new Date(b.created_at);
+                const aNoKp = a.kode_pekerjaan;
+                const bNoKp = b.kode_pekerjaan;
                 const now = new Date();
 
                 // Default sort: past deadlines first, then by deadline
@@ -308,6 +312,10 @@
                         return bCreated - aCreated;
                     case 'created_asc':
                         return aCreated - bCreated;
+                    case 'no_kp_asc':
+                        return aNoKp.localeCompare(bNoKp);
+                    case 'no_kp_desc':
+                        return bNoKp.localeCompare(aNoKp);
                     default:
                         return 0;
                 }

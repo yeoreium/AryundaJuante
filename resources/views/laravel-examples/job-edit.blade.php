@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="deadline" class="form-control-label">Deadline</label>
-                                    <input type="date" class="form-control @error('deadline') is-invalid @enderror" id="deadline" name="deadline" value="{{ old('deadline', $pekerjaan->deadline ? $pekerjaan->deadline->format('Y-m-d') : '') }}" required>
+                                    <input type="date" class="form-control @error('deadline') is-invalid @enderror" id="deadline" name="deadline" value="{{ old('deadline', $pekerjaan->deadline ? $pekerjaan->deadline->format('Y-m-d') : '') }}">
                                     @error('deadline')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -127,7 +127,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="deskripsi" class="form-control-label">Catatan</label>
-                                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="4">{{ old('deskripsi', $pekerjaan->deskripsi) }}</textarea>
+                                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4">{{ old('deskripsi', $pekerjaan->deskripsi) }}</textarea>
                                     @error('deskripsi')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
