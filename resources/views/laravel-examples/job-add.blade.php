@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="kategori" class="form-control-label">{{ __('kategori') }}</label>
+                                <label for="kategori" class="form-control-label">{{ __('Kategori') }}</label>
                                 <div>
                                     <input class="form-control"  type="text" placeholder="kategori" name="kategori">
 

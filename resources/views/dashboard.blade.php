@@ -23,7 +23,7 @@
             <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-2">
                 <div class="nav-wrapper mt-2 position-relative end-0">
                         <a href="{{ route('pekerja.profile') }}" class="btn bg-gradient-dark btn-sm mb-0 ">
-                            <i class="fas fa-user me-2"></i>Profile
+                            <i class="fas fa-user me-2"></i>Profil
                         </a>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex flex-column">
                                                     <div class="mb-2">
-                                                        <span class="text-xs text-secondary">Client:</span>
+                                                        <span class="text-xs text-secondary">Klien:</span>
                                                         <p class="text-sm mb-0">{{ $item->clients->nama ?? 'Belum Ditentukan' }}</p>
                                                     </div>
                                                     <div class="mb-2">
@@ -82,7 +82,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="mb-2">
-                                                        <a href="{{ route('pekerja.job-detail', $item->id) }}" class="btn btn-sm bg-gradient-primary mb-0">
+                                                        <a href="{{ route('pekerja.job-detail', $item->id) }}" class="btn btn-sm bg-gradient-warning mb-0">
                                                             <i class="fas fa-eye me-2"></i>Detail
                                                         </a>
                                                     </div>
@@ -102,7 +102,7 @@
                                                             <option value="Tagihan" {{ $item->status == 'Tagihan' ? 'selected' : '' }}>Tagihan</option>
                                                             <option value="Selesai" {{ $item->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                                                         </select>
-                                                        <button type="submit" class="btn btn-sm btn-outline-primary mb-0">Perbarui</button>
+                                                        <button type="submit" class="btn btn-sm bg-gradient-dark mb-0">Perbarui</button>
                                                     </div>
                                                 </form>
                                             </div>

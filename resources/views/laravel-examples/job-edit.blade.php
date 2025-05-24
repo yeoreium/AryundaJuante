@@ -10,8 +10,8 @@
                         <div>
                             <h5 class="mb-0">Edit Pekerjaan</h5>
                         </div>
-                        <a href="{{ route('admin.job-detail', $pekerjaan->id) }}" class="btn bg-gradient-primary btn-sm mb-0">
-                            <i class="fas fa-arrow-left"></i> Kembali
+                        <a href="{{ route('admin.job-detail', $pekerjaan->id) }}" class="btn bg-gradient-dark btn-sm mb-0">
+                            <i class="fas fa-arrow-left "></i> Kembali
                         </a>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                <button type="submit" class="btn bg-gradient-dark">Simpan Perubahan</button>
                             </div>
                         </div>
                     </form>

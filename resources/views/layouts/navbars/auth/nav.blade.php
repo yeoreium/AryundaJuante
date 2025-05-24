@@ -12,7 +12,7 @@
                         'admin/profile' => 'Profil',
                         'admin/jobs-management' => 'Manajemen Pekerjaan',
                         'admin/completed-jobs' => 'Pekerjaan Selesai',
-                        'admin/user-management' => 'Manajemen Pengguna',
+                        'admin/user-management' => 'Manajemen Pekerja',
                         'admin/job-add' => 'Tambah Pekerjaan',
                         'clients' => 'Manajemen Klien'
                     ];
@@ -37,7 +37,7 @@
                         'admin/profile' => 'Profil',
                         'admin/jobs-management' => 'Manajemen Pekerjaan',
                         'admin/completed-jobs' => 'Pekerjaan Selesai',
-                        'admin/user-management' => 'Manajemen Pengguna',
+                        'admin/user-management' => 'Manajemen Pekerja',
                         'admin/job-add' => 'Tambah Pekerjaan',
                         'clients' => 'Manajemen Klien'
                     ];
@@ -52,7 +52,7 @@
                     } else {
                         echo $translations[$path] ?? str_replace('-', ' ', $path);
                     }
-                    
+
                 @endphp
             </h6>
         </nav>

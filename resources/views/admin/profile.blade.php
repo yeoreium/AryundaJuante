@@ -30,7 +30,9 @@
       @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           {{ session('success') }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" >
+            <i class="fas fa-times"></i>
+          </button>
         </div>
       @endif
 
@@ -66,6 +68,9 @@
                 </li>
                 <li class="list-group-item border-0 ps-0 text-sm">
                   <strong class="text-dark">Kontak:</strong> &nbsp; {{ Auth::user()->kontak }}
+                </li>
+                <li class="list-group-item border-0 ps-0 text-sm">
+                  <strong class="text-dark">Email:</strong> &nbsp; {{ Auth::user()->email }}
                 </li>
               </ul>
             </div>
@@ -124,6 +129,10 @@
             <div class="form-group">
               <label class="form-control-label">Kontak</label>
               <input type="text" name="kontak" class="form-control" value="{{ Auth::user()->kontak }}" required>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Email</label>
+              <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" required>
             </div>
           </div>
           <div class="modal-footer">

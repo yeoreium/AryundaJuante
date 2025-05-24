@@ -118,7 +118,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 d-flex align-items-end">
-                                                <button type="submit" class="btn bg-gradient-primary w-100">Update Status</button>
+                                                <button type="submit" class="btn bg-gradient-dark w-100">Update Status</button>
                                             </div>
                                         </div>
                                     </form>

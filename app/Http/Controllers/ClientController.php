@@ -35,7 +35,7 @@ class ClientController extends Controller
         Client::create($request->all());
 
         return redirect()->route('clients.index')
-            ->with('success', 'Client berhasil ditambahkan');
+            ->with('success', 'Klien berhasil ditambahkan');
     }
 
     public function show(Client $client)
@@ -64,7 +64,7 @@ class ClientController extends Controller
         $client->update($request->all());
 
         return redirect()->route('clients.index')
-            ->with('success', 'Data client berhasil diperbarui');
+            ->with('success', 'Data klien berhasil diperbarui');
     }
 
     public function destroy(Client $client)
@@ -72,12 +72,12 @@ class ClientController extends Controller
         // Cek apakah client memiliki pekerjaan
         if ($client->pekerjaan()->count() > 0) {
             return redirect()->route('clients.index')
-                ->with('error', 'Client tidak dapat dihapus karena masih memiliki pekerjaan');
+                ->with('error', 'Klien tidak dapat dihapus karena masih memiliki pekerjaan');
         }
 
         $client->delete();
 
         return redirect()->route('clients.index')
-            ->with('success', 'Client berhasil dihapus');
+            ->with('success', 'Klien berhasil dihapus');
     }
 }

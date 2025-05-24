@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
+    <div class="nav-wrapper position-relative end-0 mt-4 ms-4">
+        <a href="{{ route('dashboard') }}" class="btn bg-gradient-dark btn-sm mb-0">
+            <i class="fas fa-arrow-left me-2"></i> Kembali ke Dashboard
+        </a>
+    </div>
     <div class="container-fluid">
         <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/back.jpg'); background-position-y: 50%;">
             <span class="mask bg-gradient-dark opacity-3"></span>
@@ -20,11 +25,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                    <div class="nav-wrapper position-relative end-0">
-                        <a href="{{ route('dashboard') }}" class="btn bg-gradient-dark btn-sm mb-0">
-                            <i class="fas fa-arrow-left me-2"></i> Kembali ke Dashboard
-                        </a>
-                    </div>
+
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <button type="submit" class="button_logout btn bg-gradient-dark mt-2">
@@ -112,7 +113,7 @@
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
-                            @if(session('error'))
+                            {{-- @if(session('error'))
                                 <div class="alert alert-danger text-white text-sm mt-2">
                                     {{ session('error') }}
                                 </div>
@@ -121,9 +122,9 @@
                                 <div class="alert alert-success text-white text-sm mt-2">
                                     {{ session('success') }}
                                 </div>
-                            @endif
+                            @endif --}}
                             <div class="text-center">
-                                <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0">Ubah Password</button>
+                                <button type="submit" class="btn bg-gradient-dark w-100 mt-4 mb-0">Ubah Password</button>
                             </div>
                         </form>
                     </div>
@@ -138,7 +139,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                <h5 class="modal-title" id="editProfileModalLabel">Ubah Profil</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route('pekerja.update-profile') }}" method="POST">
@@ -149,13 +150,13 @@
                         <input type="text" name="username" class="form-control" value="{{ $user->username }}" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label">Name</label>
+                        <label class="form-control-label">Nama</label>
                         <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                    <button type="submit" class="btn bg-gradient-dark">Simpan</button>
                 </div>
             </form>
         </div>

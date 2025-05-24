@@ -66,8 +66,11 @@
                                         No Kontak
                                     </th>
 
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Deadline
+                                    </th> --}}
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Klien
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tanggal Selesai
@@ -96,8 +99,11 @@
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $p->no_kontrak }}</p>
                                     </td>
-                                    <td class="text-center">
+                                    {{-- <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $p->deadline ? $p->deadline->format('d/m/Y') : '-' }}</p>
+                                    </td> --}}
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $p->clients->nama ?? 'Belum Ditentukan' }}</p>
                                     </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $p->updated_at->format('d/m/Y') }}</p>
@@ -239,9 +245,7 @@
                     <td class="text-center">
                         <p class="text-xs font-weight-bold mb-0">${item.no_kontrak}</p>
                     </td>
-                    <td class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">${item.deadline ? new Date(item.deadline).toLocaleDateString('id-ID', {day: '2-digit', month: '2-digit', year: 'numeric'}) : '-'}</p>
-                    </td>
+
                     <td class="text-center">
                         <p class="text-xs font-weight-bold mb-0">${new Date(item.updated_at).toLocaleDateString('id-ID', {day: '2-digit', month: '2-digit', year: 'numeric'})}</p>
                     </td>

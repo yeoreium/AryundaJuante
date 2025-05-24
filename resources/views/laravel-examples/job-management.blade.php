@@ -98,8 +98,8 @@
                                 <select class="form-select" id="sortFilter">
                                     <option value="deadline_asc">Deadline (Terdekat)</option>
                                     <option value="deadline_desc">Deadline (Terjauh)</option>
-                                    <option value="created_desc">Terbaru Dibuat</option>
-                                    <option value="created_asc">Terlama Dibuat</option>
+                                    <option value="created_desc">Terbaru Ditambahkan</option>
+                                    <option value="created_asc">Terlama Ditambahkan</option>
                                     <option value="no_kp_asc">No KP A-Z</option>
                                     <option value="no_kp_desc">No KP Z-A</option>
                                 </select>
@@ -142,7 +142,13 @@
                             </thead>
                             <tbody id="pekerjaanTableBody">
                                 @foreach($pekerjaans->take(10) as $p)
-                                <tr style="{{ $p->deadline && \Carbon\Carbon::parse($p->deadline)->isPast() ? 'color: red !important;' : '' }}">
+                                <tr style="{{
+                                    $p->deadline && \Carbon\Carbon::parse($p->deadline)->isPast()
+                                        ? 'color: red !important;'
+                                        : ($p->deadline && \Carbon\Carbon::parse($p->deadline)->isBetween(now(), now()->addDays(7))
+                                            ? 'color: orange !important;'
+                                            : '')
+                                }}">
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $p->kode_pekerjaan }}</p>
                                     </td>
@@ -416,7 +422,7 @@
                 statusFilter.value = '';
                 handlerFilter.value = '';
                 clientFilter.value = '';
-                sortFilter.value = '';
+                // sortFilter.value = '';
                 renderTable(pekerjaans);
                 showAllBtn.style.display = 'none';
             });

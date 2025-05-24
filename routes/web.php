@@ -289,15 +289,17 @@ Route::put('/admin/tambah-pekerja/{id}/reset-password', function ($id) {
             'username' => 'required|string|max:255|unique:users,username,' . Auth::id(),
             'name' => 'required|string|max:255',
             'kontak' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
         ]);
 
         $user = User::find(Auth::id());
         $user->username = $request->username;
         $user->name = $request->name;
         $user->kontak = $request->kontak;
+        $user->email = $request->email;
         $user->save();
 
-        return redirect()->back()->with('success', 'Profile updated successfully!');
+        return redirect()->back()->with('success', 'Profil berhasil diubah!');
     })->name('admin.update-profile');
 
     Route::post('/admin/update-password', function (Request $request) {
@@ -309,13 +311,13 @@ Route::put('/admin/tambah-pekerja/{id}/reset-password', function ($id) {
         $user = User::find(Auth::id());
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->with('error', 'Current password is incorrect!');
+            return redirect()->back()->with('error', 'Password saat ini salah!');
         }
 
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->back()->with('success', 'Password updated successfully!');
+        return redirect()->back()->with('success', 'Password Berhasil Diubah!');
     })->name('admin.update-password');
 
     // Client Management Routes
