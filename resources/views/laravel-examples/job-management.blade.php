@@ -348,6 +348,9 @@
                 if (deadline && deadline < today) {
                     row.style.color = 'red';
                 }
+                else if (deadline && deadline < today.setDate(today.getDate() + 7)) {
+                    row.style.color = 'orange';
+                }
 
                 const statusClass =
                     item.status === 'Tagihan' ? 'success' :
@@ -368,7 +371,7 @@
                         </div>
                     </td>
                     <td class="text-center">
-                        <p class="text-xs font-weight-bold mb-0">${item.kode_pekerjaan}</p>
+                        <p class="text-xs font-weight-bold mb-0">${item.no_kontrak}</p>
                     </td>
                     <td class="text-center">
                         <p class="text-xs font-weight-bold mb-0">${item.clients?.nama ?? 'Belum Ditentukan'}</p>

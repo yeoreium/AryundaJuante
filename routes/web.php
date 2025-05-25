@@ -142,6 +142,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
             ->with('clients')
             ->where('status', '!=','selesai')
             ->orderByRaw('CASE WHEN deadline < NOW() THEN 0 ELSE 1 END')
+            ->orderByRaw('CASE WHEN deadline < NOW() + INTERVAL 7 DAY THEN 0 ELSE 1 END')
             ->orderBy('deadline', 'asc')
             ->get();
         return view('laravel-examples.job-management',compact('pekerjas','pekerjaans','clients'));
