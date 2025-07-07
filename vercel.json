@@ -2,35 +2,33 @@
     "version": 2,
     "framework": null,
     "functions": {
-      "api/index.php": { "runtime": "vercel-php@0.6.0" }
+        "api/index.php": { "runtime": "vercel-php@0.6.0" }
     },
     "routes": [
-      { "src": "/build/(.*)", "dest": "/public/build/$1" },
-      { "src": "/images/(.*)", "dest": "/public/images/$1" },
-      { "src": "/css/(.*)", "dest": "/public/css/$1" },
-      { "src": "/js/(.*)", "dest": "/public/js/$1" },
-      { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
-      { "src": "/(.*)", "dest": "/api/index.php" }
+        { "src": "/build/(.*)", "dest": "/public/build/" },
+        { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "public": true,
-    "buildCommand": "php ./vendor/bin/vercel-build",
+    "buildCommand": "vite build",
     "outputDirectory": "public",
     "env": {
-      "APP_ENV": "production",
-      "APP_DEBUG": "true",
-      "APP_CONFIG_CACHE": "/tmp/config.php",
-      "APP_EVENTS_CACHE": "/tmp/events.php",
-      "APP_PACKAGES_CACHE": "/tmp/packages.php",
-      "APP_ROUTES_CACHE": "/tmp/routes.php",
-      "APP_SERVICES_CACHE": "/tmp/services.php",
-      "VIEW_COMPILED_PATH": "/tmp",
-      "CACHE_DRIVER": "array",
-      "LOG_CHANNEL": "stderr",
-      "SESSION_DRIVER": "cookie",
-      "DB_CONNECTION": "mysql",
-      "DB_HOST": "cfppt.h.filess.io",
-      "DB_PORT": "3307",
-      "DB_DATABASE": "aryundajuante_emptyfurof",
-      "DB_USERNAME": "aryundajuante_emptyfurof"
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://aryundajuante.vercel.app",
+        "APP_KEY": "base64:eZP7mNNNeWDf8rS0u+zSql3GuG8epNVXXxyFdrbIXHk=",
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+        "CACHE_DRIVER": "array",
+        "LOG_CHANNEL": "stderr",
+        "SESSION_DRIVER": "cookie",
+        "DB_CONNECTION": "mysql",
+        "DB_HOST": "cfppt.h.filess.io",
+        "DB_PORT": "3307",
+        "DB_DATABASE": "aryundajuante_emptyfurof",
+        "DB_USERNAME": "aryundajuante_emptyfurof"
     }
-  }
+}
