@@ -13,7 +13,7 @@
       { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "public": true,
-    "buildCommand": "vite build",
+    "buildCommand": "php ./vendor/bin/vercel-build",
     "outputDirectory": "public",
     "env": {
       "APP_ENV": "production",
