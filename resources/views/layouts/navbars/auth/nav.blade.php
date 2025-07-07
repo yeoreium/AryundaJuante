@@ -69,6 +69,15 @@
             </div> --}}
             </div>
             <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center me-2">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                    <div class="sidenav-toggler-inner">
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                    </div>
+                    </a>
+                </li>
             <li class="nav-item d-flex align-items-center">
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
